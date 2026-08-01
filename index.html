@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webルーレット</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Webルーレット</h1>
+    </div>
+
+    <div class="app-container" id="appContainer">
+        <!-- 左側：ルーレット表示エリア -->
+        <div class="roulette-section" id="rouletteSection">
+            
+            <!-- 右上のフローティング操作アイコン群 -->
+            <div class="floating-controls">
+                <button id="zoomOutBtn" class="icon-btn" title="縮小">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                </button>
+                <button id="zoomInBtn" class="icon-btn" title="拡大">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                </button>
+                <button id="fullscreenBtn" class="icon-btn" title="全画面表示">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+                </button>
+            </div>
+
+            <div class="canvas-container" id="canvasContainer">
+                <div class="pointer">▼</div>
+                <canvas id="rouletteCanvas" width="1000" height="1000"></canvas>
+            </div>
+            
+            <button id="startBtn" class="btn-primary">▶ スタート</button>
+            <div id="resultDisplay" class="result-box">結果は...<br><span id="resultName">-</span></div>
+        </div>
+
+        <!-- 右側：設定エリア -->
+        <div class="settings-section" id="settingsSection">
+            <div class="setting-card">
+                <h3>ルーレットの項目 (人数: <span id="itemCount">0</span>人)</h3>
+                <div class="list-save-area">
+                    <input type="text" id="listTitle" placeholder="例: 1年A組、国際交流イベント など">
+                </div>
+                <p class="hint">名前を改行で区切ってコピペしてください</p>
+                <textarea id="nameList" rows="8"></textarea>
+                
+                <div class="action-buttons">
+                    <button id="updateBtn" class="btn-secondary">ルーレットに反映</button>
+                    <button id="saveHistoryBtn" class="btn-secondary outline">このリストを保存</button>
+                </div>
+
+                <div class="history-section">
+                    <h4>保存済みのリスト</h4>
+                    <div id="historyContainer" class="history-container"></div>
+                </div>
+            </div>
+
+            <div class="setting-card">
+                <h3>設定</h3>
+                <div class="setting-item">
+                    <label for="speedRange">ルーレットの速さ</label>
+                    <input type="range" id="speedRange" min="10" max="50" value="30">
+                </div>
+                <div class="setting-item">
+                    <label for="soundToggle">サウンド</label>
+                    <input type="checkbox" id="soundToggle" checked> ON
+                </div>
+            </div>
+            
+            <!-- 使い方セクション -->
+            <div class="usage-card">
+                <h3>✏️ Webルーレットの使い方</h3>
+                <ul>
+                    <li>今すぐ無料で使えるルーレットマシーンです。ランダムに何か/誰かを選びたいときに便利です。</li>
+                    <li>スタートボタンを押すとルーレットが回り、自動で止まります。</li>
+                    <li>YouTube配信やイベント、罰ゲームルーレットなどご自由にお使いください。</li>
+                    <li>YouTubeでの配信やプロジェクターに映すときには「全画面表示」モードを使うのがおすすめです。</li>
+                    <li>項目の色や名前は変更できます。名前を改行して入力してください。</li>
+                    <li>回転速度は「ルーレットの速さ」で変更できます。</li>
+                    <li>リストは保存して後から呼び出すことができます。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 下部：シェアとフッター -->
+    <div class="bottom-section">
+        <div class="share-card">
+            <h3>🙌 先生仲間や友人にシェアする</h3>
+            <p>日々の授業やイベントのグループ分けに。<br>SNSやメッセージアプリでの共有、大歓迎です！</p>
+            <div class="share-buttons">
+                <button class="share-btn twitter">𝕏 X (Twitter)</button>
+                <button class="share-btn facebook">f Facebook</button>
+                <button class="share-btn line">LINE</button>
+                <button class="share-btn copy-link">📄 リンクをコピー</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://sites.google.com/view/koheinakashima/bio" target="_blank" rel="noopener">👤 開発者情報</a>
+            <a href="#" id="disclaimerLink">ℹ️ 免責事項</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 Web Roulette
+        </div>
+    </footer>
+
+    <!-- 免責事項モーダル -->
+    <div id="disclaimerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>免責事項</h2>
+            <div class="modal-body">
+                <p>当サイト（Webルーレット）の利用により発生したいかなるトラブル、損害、損失についても、開発者は一切の責任を負いません。</p>
+                <p>本ツールは「現状有姿」で提供され、特定の目的に対する適合性や完全性、正確性を保証するものではありません。イベントや配信、業務等でのご利用は、利用者ご自身の責任において行ってください。</p>
+                <p>また、予告なくサービスの変更、停止、終了を行う場合があります。あらかじめご了承ください。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
