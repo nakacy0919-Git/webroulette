@@ -1,15 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webルーレット</title>
+    <title>ClassPin - 無料で使えるWebルーレット</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="header">
-        <h1>Webルーレット</h1>
+        <div class="title-wrapper">
+            <img src="assets/spinlogo.png" alt="ClassPin Logo" class="app-logo">
+            <h1 class="app-title">ClassPin</h1>
+        </div>
     </div>
 
     <div class="app-container" id="appContainer">
@@ -35,7 +37,17 @@
             </div>
             
             <button id="startBtn" class="btn-primary">▶ スタート</button>
-            <div id="resultDisplay" class="result-box">結果は...<br><span id="resultName">-</span></div>
+            
+            <!-- 結果表示エリア -->
+            <div id="resultDisplay" class="result-box">
+                <div style="font-size: 14px; color: #666; margin-bottom: 5px;">結果は...</div>
+                <span id="resultName">-</span>
+                
+                <div class="result-actions" style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                    <button id="removeAndContinueBtn" class="btn-action" style="background: #ff6b6b; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px;">🗑️ 削除して続ける</button>
+                    <button id="closeResultBtn" class="btn-action" style="background: #f1f2f6; color: #576574; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px;">✖ 閉じる</button>
+                </div>
+            </div>
         </div>
 
         <!-- 右側：設定エリア -->
@@ -43,9 +55,9 @@
             <div class="setting-card">
                 <h3>ルーレットの項目 (人数: <span id="itemCount">0</span>人)</h3>
                 <div class="list-save-area">
-                    <input type="text" id="listTitle" placeholder="例: 1年A組、国際交流イベント など">
+                    <input type="text" id="listTitle" placeholder="例: 1年A組、ディスカッショントピック など">
                 </div>
-                <p class="hint">名前を改行で区切ってコピペしてください</p>
+                <p class="hint">名前や英単語を改行で区切ってコピペしてください</p>
                 <textarea id="nameList" rows="8"></textarea>
                 
                 <div class="action-buttons">
@@ -66,21 +78,19 @@
                     <input type="range" id="speedRange" min="10" max="50" value="30">
                 </div>
                 <div class="setting-item">
-                    <label for="soundToggle">サウンド</label>
+                    <label for="soundToggle">サウンド・音声読み上げ</label>
                     <input type="checkbox" id="soundToggle" checked> ON
                 </div>
             </div>
             
             <!-- 使い方セクション -->
             <div class="usage-card">
-                <h3>✏️ Webルーレットの使い方</h3>
+                <h3>✏️ ClassPinの使い方</h3>
                 <ul>
-                    <li>今すぐ無料で使えるルーレットマシーンです。ランダムに何か/誰かを選びたいときに便利です。</li>
+                    <li>今すぐ無料で使えるルーレットマシーンです。ランダムに生徒を指名したり、トピックを選びたいときに便利です。</li>
                     <li>スタートボタンを押すとルーレットが回り、自動で止まります。</li>
-                    <li>YouTube配信やイベント、罰ゲームルーレットなどご自由にお使いください。</li>
-                    <li>YouTubeでの配信やプロジェクターに映すときには「全画面表示」モードを使うのがおすすめです。</li>
-                    <li>項目の色や名前は変更できます。名前を改行して入力してください。</li>
-                    <li>回転速度は「ルーレットの速さ」で変更できます。</li>
+                    <li>サウンドONの時は、結果がネイティブな英語音声で読み上げられます。</li>
+                    <li>結果画面の「削除して続ける」を押すと、一度出た項目を除外してルーレットを続けることができます。</li>
                     <li>リストは保存して後から呼び出すことができます。</li>
                 </ul>
             </div>
@@ -91,7 +101,7 @@
     <div class="bottom-section">
         <div class="share-card">
             <h3>🙌 先生仲間や友人にシェアする</h3>
-            <p>日々の授業やイベントのグループ分けに。<br>SNSやメッセージアプリでの共有、大歓迎です！</p>
+            <p>日々の授業やイベントのアクティビティに。<br>SNSやメッセージアプリでの共有、大歓迎です！</p>
             <div class="share-buttons">
                 <button class="share-btn twitter">𝕏 X (Twitter)</button>
                 <button class="share-btn facebook">f Facebook</button>
@@ -107,7 +117,7 @@
             <a href="#" id="disclaimerLink">ℹ️ 免責事項</a>
         </div>
         <div class="footer-copyright">
-            &copy; 2026 Web Roulette
+            &copy; 2026 ClassPin
         </div>
     </footer>
 
@@ -117,8 +127,8 @@
             <span class="close-modal">&times;</span>
             <h2>免責事項</h2>
             <div class="modal-body">
-                <p>当サイト（Webルーレット）の利用により発生したいかなるトラブル、損害、損失についても、開発者は一切の責任を負いません。</p>
-                <p>本ツールは「現状有姿」で提供され、特定の目的に対する適合性や完全性、正確性を保証するものではありません。イベントや配信、業務等でのご利用は、利用者ご自身の責任において行ってください。</p>
+                <p>当サイト（ClassPin）の利用により発生したいかなるトラブル、損害、損失についても、開発者は一切の責任を負いません。</p>
+                <p>本ツールは「現状有姿」で提供され、特定の目的に対する適合性や完全性、正確性を保証するものではありません。イベントや授業でのご利用は、利用者ご自身の責任において行ってください。</p>
                 <p>また、予告なくサービスの変更、停止、終了を行う場合があります。あらかじめご了承ください。</p>
             </div>
         </div>

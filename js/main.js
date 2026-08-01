@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('rouletteCanvas');
     const ctx = canvas.getContext('2d');
@@ -17,6 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const zoomInBtn = document.getElementById('zoomInBtn');
     const zoomOutBtn = document.getElementById('zoomOutBtn');
     const fullscreenBtn = document.getElementById('fullscreenBtn');
+    
+    // 追加した結果操作ボタン
+    const removeAndContinueBtn = document.getElementById('removeAndContinueBtn');
+    const closeResultBtn = document.getElementById('closeResultBtn');
     
     const rouletteSection = document.getElementById('rouletteSection');
     const soundToggle = document.getElementById('soundToggle');
@@ -38,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isSpinning = false;
     let animationId;
     let lastTickIndex = -1;
+    let lastSelectedIndex = -1; // 最後に選ばれたインデックスを記憶
     
     const BASE_CANVAS_SIZE = 500; 
     let currentScale = 1.0;
@@ -80,6 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
             osc.start(audioCtx.currentTime + (i * 0.05));
             osc.stop(audioCtx.currentTime + (i * 0.05) + 1.5);
         });
+    }
+
+    // Web Speech API を使用した音声読み上げ
+    function speakResult(text) {
+        if (!soundToggle.checked) return;
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US'; // 英語ベースの発音
+            utterance.rate = 1.0;
+            window.speechSynthesis.speak(utterance);
+        }
     }
 
     function init() {
@@ -235,9 +250,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showResult(index) {
+        lastSelectedIndex = index;
         resultName.textContent = items[index];
         resultDisplay.style.display = 'block';
         playResultSound();
+        speakResult(items[index]); // 読み上げ機能の呼び出し
     }
 
     function applyCanvasSize() {
@@ -277,6 +294,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 「削除して続ける」ボタンのイベント
+    if (removeAndContinueBtn) {
+        removeAndContinueBtn.addEventListener('click', () => {
+            if (lastSelectedIndex !== -1 && items.length > 0) {
+                items.splice(lastSelectedIndex, 1);
+                nameListTextarea.value = items.join('\n');
+                itemCountSpan.textContent = items.length;
+                localStorage.setItem('currentNames', nameListTextarea.value);
+                drawRoulette();
+                resultDisplay.style.display = 'none';
+                lastSelectedIndex = -1;
+            }
+        });
+    }
+
+    // 「閉じる」ボタンのイベント
+    if (closeResultBtn) {
+        closeResultBtn.addEventListener('click', () => {
+            resultDisplay.style.display = 'none';
+        });
+    }
+
     if (disclaimerLink) {
         disclaimerLink.addEventListener('click', (e) => {
             e.preventDefault();
@@ -297,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const shareUrl = window.location.href; 
-    const shareText = "Webルーレット - 無料ですぐに使えるおしゃれなルーレット機能！";
+    const shareText = "SpinTalk - 日々の授業やイベントを盛り上げるおしゃれなルーレット機能！";
 
     if (twitterBtn) {
         twitterBtn.addEventListener('click', () => {
