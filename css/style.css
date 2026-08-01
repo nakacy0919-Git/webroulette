@@ -25,35 +25,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* ロゴと文字の隙間 */
+    gap: 15px;
 }
 
-/* ★ ロゴ画像のスタイル（アニメーションなし） */
 .app-logo {
     width: 80px;
     height: 80px;
-    border-radius: 50%; /* 画像を綺麗な丸に切り抜く */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* 軽い影をつける */
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* ★ インパクトのある太いフォントと静的なグラデーションデザイン */
+/* ★ 画像に寄せた丸みのある太字デザイン */
 .app-title {
-    font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
-    font-size: 64px; /* サイズを大きく */
+    font-family: 'Arial Rounded MT Bold', 'Nunito', 'Helvetica Rounded', 'Arial Black', sans-serif;
+    font-size: 64px;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     margin: 0;
-    
-    /* シアン → ネイビー → ピンクの静的グラデーション */
-    background: linear-gradient(to right, #00ced1, #132c4a, #ff4d79);
-    
-    /* 背景色をテキストで切り抜く */
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    
-    /* 強いドロップシャドウでインパクトを出す */
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+    /* 強いドロップシャドウで立体感を出す */
+    filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* ★ ClassPinの「Class」部分（ネイビー） */
+.title-class {
+    color: #0f2c4d;
+}
+
+/* ★ ClassPinの「Pin」部分（ピンク） */
+.title-pin {
+    color: #ff6b81;
 }
 
 .app-container {
